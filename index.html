@@ -3,158 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcade HTML5 - Panel de Juegos</title>
+    <title>Arcade Premium - Colección de Juegos JS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4e54c8;
-            --secondary-color: #8f94fb;
+            --bg-dark: #0b0e14;
+            --card-bg: #161b22;
+            --accent-blue: #00d2ff;
+            --accent-purple: #9d50bb;
         }
-        body { 
-            background-color: #f8f9fa; 
-            font-family: 'Poppins', sans-serif;
+
+        body {
+            background-color: var(--bg-dark);
+            color: #e6edf3;
+            font-family: 'Roboto', sans-serif;
         }
-        .header-arcade {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 60px 0;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* Encabezado Neón */
+        .hero-header {
+            background: linear-gradient(45deg, #0b0e14, #161b22);
+            padding: 100px 0 60px;
+            border-bottom: 2px solid var(--accent-blue);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
         }
-        /* Estilo de la imagen-enlace */
-        .game-link-img {
-            display: inline-block;
-            width: 150px;
-            height: 150px;
-            overflow: hidden;
+
+        /* Imagen de Referencia Izquierda */
+        .sticky-sidebar {
+            position: sticky;
+            top: 20px;
+        }
+
+        .ref-img-container {
+            border: 2px solid var(--accent-purple);
             border-radius: 20px;
-            border: 4px solid white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(157, 80, 187, 0.3);
+        }
+
+        /* Tarjetas de Juego */
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid #30363d;
+            border-radius: 15px;
+            margin-bottom: 25px;
             transition: all 0.3s ease;
-            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        .game-link-img:hover {
+
+        .game-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        /* Imagen del Juego (Único Enlace) */
+        .game-thumb-link {
+            display: block;
+            width: 140px;
+            height: 140px;
+            margin: auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid transparent;
+            transition: 0.4s;
+        }
+
+        .game-thumb-link:hover {
+            border-color: var(--accent-blue);
             transform: scale(1.1) rotate(3deg);
-            border-color: var(--secondary-color);
-            box-shadow: 0 12px 25px rgba(143, 148, 251, 0.4);
         }
-        .game-link-img img {
+
+        .game-thumb-link img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        /* Contenedor de cada fila de juego */
-        .game-entry {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 30px;
-            transition: 0.3s;
-            border-left: 8px solid var(--primary-color);
+
+        .game-title {
+            color: var(--accent-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .game-entry:hover {
-            background: #ffffff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        .ref-image {
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
+
         footer {
-            background: #212529;
-            color: white;
-            padding: 40px 0;
-            margin-top: 60px;
+            background: #010409;
+            padding: 50px 0;
+            margin-top: 80px;
+            border-top: 1px solid #30363d;
+        }
+
+        .badge-js {
+            background: #f7df1e;
+            color: black;
+            font-weight: bold;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-    <header class="header-arcade text-center">
+    <header class="hero-header text-center">
         <div class="container">
-            <h1 class="display-2 fw-bold mb-2">Juegos HTML</h1>
-            <p class="fs-4 opacity-75">Haz clic en las imágenes para empezar el desafío</p>
+            <h1 class="display-1 orbitron fw-bold mb-3">JUEGOS <span style="color: var(--accent-blue);">JS</span></h1>
+            <p class="lead fs-4 text-secondary">PROYECTO ACADÉMICO DE PROGRAMACIÓN WEB</p>
         </div>
     </header>
 
-    <div class="container">
+    <div class="container my-5">
         <div class="row">
-            <div class="col-lg-4 text-center mb-5">
-                <div class="sticky-top" style="top: 20px;">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80" 
-                         alt="Gaming Reference" class="img-fluid ref-image mb-4">
-                    <div class="p-3">
-                        <h3 class="fw-bold text-dark">Zona Arcade</h3>
-                        <p class="text-muted">Explora nuestra colección de 5 juegos interactivos desarrollados con lógica pura de JavaScript.</p>
+            <div class="col-lg-4 mb-5">
+                <div class="sticky-sidebar">
+                    <div class="ref-img-container mb-4">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600" alt="Arcade" class="img-fluid">
+                    </div>
+                    <div class="p-3 bg-dark rounded shadow-sm">
+                        <h4 class="orbitron text-white">GAME HUB</h4>
+                        <p class="text-secondary small">Haz clic en los iconos a tu derecha para desplegar cada aplicación. Cada juego corre en un entorno aislado de JavaScript.</p>
+                        <hr class="border-secondary">
+                        <div class="d-flex justify-content-between">
+                            <span class="badge-js">JAVASCRIPT</span>
+                            <span class="badge-js" style="background: #563d7c; color: white;">BOOTSTRAP 5</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-8">
                 
-                <div class="row game-entry align-items-center">
-                    <div class="col-sm-4 text-center mb-3 mb-sm-0">
-                        <a href="tictactoe.html" class="game-link-img">
-                            <img src="https://cdn-icons-png.flaticon.com/512/566/566294.png" alt="Jugar Tres en Raya">
-                        </a>
-                    </div>
-                    <div class="col-sm-8">
-                        <h2 class="h3 fw-bold">Tres en Raya</h2>
-                        <p class="text-muted">Enfrenta a un amigo en este tablero clásico. Introduce tus nombres y demuestra quién es el mejor estratega alineando tres figuras.</p>
-                        <span class="badge bg-primary px-3 py-2 rounded-pill">Estrategia</span>
-                    </div>
-                </div>
-
-                <div class="row game-entry align-items-center" style="border-left-color: #ff4757;">
-                    <div class="col-sm-4 text-center mb-3 mb-sm-0">
-                        <a href="hanoi.html" class="game-link-img">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3556/3556551.png" alt="Jugar Torres de Hanoi">
-                        </a>
-                    </div>
-                    <div class="col-sm-8">
-                        <h2 class="h3 fw-bold">Torres de Hanoi</h2>
-                        <p class="text-muted">El rompecabezas matemático de los 3 discos. Mueve la torre al destino con el menor número de movimientos posibles. ¡Cuidado con el contador!</p>
-                        <span class="badge bg-danger px-3 py-2 rounded-pill">Lógica</span>
+                <div class="game-card p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center">
+                            <a href="tictactoe.html" target="_blank" class="game-thumb-link">
+                                <img src="https://cdn-icons-png.flaticon.com/512/566/566294.png" alt="Play TicTacToe">
+                            </a>
+                        </div>
+                        <div class="col-md-9 mt-3 mt-md-0">
+                            <h2 class="h4 game-title orbitron">Tres en Raya</h2>
+                            <p class="text-secondary mb-0">Implementación lógica de turnos para dos jugadores con validación de estados ganadores y empate.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row game-entry align-items-center" style="border-left-color: #ffc107;">
-                    <div class="col-sm-4 text-center mb-3 mb-sm-0">
-                        <a href="memoria.html" class="game-link-img">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3126/3126581.png" alt="Jugar Memoria">
-                        </a>
-                    </div>
-                    <div class="col-sm-8">
-                        <h2 class="h3 fw-bold">Juego de Memoria</h2>
-                        <p class="text-muted">¿Qué tan buena es tu retentiva visual? Encuentra todos los pares antes de que el reloj llegue a cero. ¡30 segundos de pura adrenalina!</p>
-                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Memoria</span>
-                    </div>
-                </div>
-
-                <div class="row game-entry align-items-center" style="border-left-color: #28a745;">
-                    <div class="col-sm-4 text-center mb-3 mb-sm-0">
-                        <a href="snake.html" class="game-link-img">
-                            <img src="https://cdn-icons-png.flaticon.com/512/528/528105.png" alt="Jugar Snake">
-                        </a>
-                    </div>
-                    <div class="col-sm-8">
-                        <h2 class="h3 fw-bold">Snake (La Serpiente)</h2>
-                        <p class="text-muted">Guía a la serpiente para comer y crecer. Evita chocar contra las paredes o tu propio cuerpo en este clásico arcade con contador de puntos.</p>
-                        <span class="badge bg-success px-3 py-2 rounded-pill">Reflejos</span>
+                <div class="game-card p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center">
+                            <a href="hanoi.html" target="_blank" class="game-thumb-link">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3556/3556551.png" alt="Play Hanoi">
+                            </a>
+                        </div>
+                        <div class="col-md-9 mt-3 mt-md-0">
+                            <h2 class="h4 game-title orbitron" style="color: #ff4757;">Torres de Hanoi</h2>
+                            <p class="text-secondary mb-0">Desafío matemático que utiliza manipulación de arrays y eventos de clic para mover discos centrados.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row game-entry align-items-center" style="border-left-color: #17a2b8;">
-                    <div class="col-sm-4 text-center mb-3 mb-sm-0">
-                        <a href="clicker.html" class="game-link-img">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2859/2859733.png" alt="Jugar Clicker">
-                        </a>
+                <div class="game-card p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center">
+                            <a href="memoria.html" target="_blank" class="game-thumb-link">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3126/3126581.png" alt="Play Memory">
+                            </a>
+                        </div>
+                        <div class="col-md-9 mt-3 mt-md-0">
+                            <h2 class="h4 game-title orbitron" style="color: #ffc107;">Memoria</h2>
+                            <p class="text-secondary mb-0">Algoritmo de barajado aleatorio y lógica de emparejamiento con temporizador de cuenta regresiva.</p>
+                        </div>
                     </div>
-                    <div class="col-sm-8">
-                        <h2 class="h3 fw-bold">Desafío de Clics</h2>
-                        <p class="text-muted">Pon a prueba tu velocidad de dedo. Haz la mayor cantidad de clics en 10 segundos y rompe tu propio récord personal.</p>
-                        <span class="badge bg-info text-white px-3 py-2 rounded-pill">Velocidad</span>
+                </div>
+
+                <div class="game-card p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center">
+                            <a href="snake.html" target="_blank" class="game-thumb-link">
+                                <img src="https://cdn-icons-png.flaticon.com/512/528/528105.png" alt="Play Snake">
+                            </a>
+                        </div>
+                        <div class="col-md-9 mt-3 mt-md-0">
+                            <h2 class="h4 game-title orbitron" style="color: #2ed573;">Snake Retro</h2>
+                            <p class="text-secondary mb-0">Manipulación de Canvas 2D para renderizado en tiempo real y detección de colisiones.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center">
+                            <a href="clicker.html" target="_blank" class="game-thumb-link">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2859/2859733.png" alt="Play Clicker">
+                            </a>
+                        </div>
+                        <div class="col-md-9 mt-3 mt-md-0">
+                            <h2 class="h4 game-title orbitron" style="color: #00d2ff;">Speed Clicker</h2>
+                            <p class="text-secondary mb-0">Test de velocidad que gestiona estados globales y eventos asíncronos para el cronómetro.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -164,19 +213,18 @@
 
     <footer>
         <div class="container text-center">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <h5 class="fw-bold">Sobre el Proyecto</h5>
-                    <p class="small opacity-75">Este sitio es una práctica integral de Programación Web utilizando Bootstrap para diseño y Vanilla JavaScript para la lógica de juegos.</p>
+            <h5 class="orbitron mb-4">INFORMACIÓN DEL DESARROLLADOR</h5>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <p class="mb-1 text-secondary">NOMBRE: <span class="text-white fw-bold">Mario Andres Aguilar Arias</span></p>
+                    <p class="mb-1 text-secondary">CONTACTO: <span class="text-white fw-bold">maaguilar17@espe.edu.ec</span></p>
                 </div>
-                <div class="col-md-6">
-                    <h5 class="fw-bold">Datos del Creador</h5>
-                    <p class="mb-1"><strong>Nombre:</strong>Mario Aguilar </p>
-                    <p class="mb-0"><strong>Contacto:</strong>maaguilar17@espe.edu.ec</p>
+                <div class="col-md-4">
+                    <p class="mb-1 text-secondary">TECNOLOGÍAS: <span class="text-white fw-bold">HTML5, CSS3, JS</span></p>
+                    <p class="mb-1 text-secondary">CURSO: <span class="text-white fw-bold">WEB DEV 2025</span></p>
                 </div>
             </div>
-            <hr class="my-4 opacity-25">
-            <p class="mb-0 small">© 2025 Examen de Programación Web - Todos los derechos reservados.</p>
+            <p class="mt-5 small text-muted">© 2025 - EXAMEN DE PROGRAMACIÓN WEB</p>
         </div>
     </footer>
 
