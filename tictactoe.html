@@ -68,77 +68,7 @@
         </div>
     </div>
 
-    <script>
-        let boardState = ["", "", "", "", "", "", "", "", ""];
-        let currentPlayer = "X";
-        let gameActive = true;
-
-        const statusDisplay = document.getElementById('status');
-        const boardElement = document.getElementById('board');
-
-        function createBoard() {
-            boardElement.innerHTML = "";
-            boardState.forEach((cell, index) => {
-                const cellElement = document.createElement('div');
-                cellElement.classList.add('cell');
-                if (cell !== "") cellElement.classList.add('occupied');
-                
-                // Asignar color según el símbolo
-                if (cell === "X") cellElement.classList.add('x-player');
-                if (cell === "O") cellElement.classList.add('o-player');
-                
-                cellElement.innerText = cell;
-                cellElement.addEventListener('click', () => handleCellClick(index));
-                boardElement.appendChild(cellElement);
-            });
-            updateStatus();
-        }
-
-        function handleCellClick(index) {
-            if (boardState[index] !== "" || !gameActive) return;
-
-            boardState[index] = currentPlayer;
-            if (checkWinner()) {
-                const winnerName = currentPlayer === "X" ? document.getElementById('nameX').value : document.getElementById('nameO').value;
-                statusDisplay.innerHTML = `<span class="text-success">¡Victoria para ${winnerName}!</span>`;
-                gameActive = false;
-            } else if (!boardState.includes("")) {
-                statusDisplay.innerText = "¡Es un empate!";
-                gameActive = false;
-            } else {
-                currentPlayer = currentPlayer === "X" ? "O" : "X";
-                updateStatus();
-            }
-            createBoard();
-        }
-
-        function updateStatus() {
-            if (gameActive) {
-                const currentName = currentPlayer === "X" ? document.getElementById('nameX').value : document.getElementById('nameO').value;
-                statusDisplay.innerText = `Turno de: ${currentName} (${currentPlayer})`;
-            }
-        }
-
-        function checkWinner() {
-            const winPatterns = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontales
-                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Verticales
-                [0, 4, 8], [2, 4, 6]             // Diagonales
-            ];
-            return winPatterns.some(pattern => {
-                return pattern.every(index => boardState[index] === currentPlayer);
-            });
-        }
-
-        function resetGame() {
-            boardState = ["", "", "", "", "", "", "", "", ""];
-            currentPlayer = "X";
-            gameActive = true;
-            createBoard();
-        }
-
-        // Inicializar al cargar
-        createBoard();
-    </script>
+    
+<script src="tictactoe.js"></script> 
 </body>
 </html>

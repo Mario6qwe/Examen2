@@ -25,20 +25,6 @@
             <a href="index.html" class="btn btn-light btn-lg">Volver</a>
         </div>
     </div>
-    <script>
-        let clics = 0, time = 10, start = false;
-        function hit() {
-            if(time > 0) {
-                clics++; document.getElementById('c').innerText = clics;
-                if(!start) {
-                    start = true;
-                    let timer = setInterval(() => {
-                        time--; document.getElementById('t').innerText = time;
-                        if(time <= 0) { clearInterval(timer); alert("Hiciste " + clics + " clics. ¡Increíble!"); location.reload(); }
-                    }, 1000);
-                }
-            }
-        }
-    </script>
+<script src="clicker.js"></script>
 </body>
 </html>

@@ -24,37 +24,6 @@
         <a href="index.html" class="btn btn-secondary mt-4">Salir</a>
     </div>
 
-    <script>
-        const icons = ['🔥','🔥','🍀','🍀','💎','💎','🍎','🍎','👻','👻','⚽','⚽'];
-        let deck = icons.sort(() => Math.random() - 0.5), selected = [], found = 0, time = 30;
-        const grid = document.getElementById('grid');
-
-        const clock = setInterval(() => {
-            time--; document.getElementById('timer').innerText = time;
-            if(time <= 0) { clearInterval(clock); alert("¡Tiempo acabado!"); location.reload(); }
-        }, 1000);
-
-        deck.forEach((icon) => {
-            const card = document.createElement('div');
-            card.className = "memory-card m-2";
-            card.innerHTML = `<div class="inner"><div class="front">?</div><div class="back">${icon}</div></div>`;
-            card.onclick = () => {
-                if(selected.length < 2 && !card.classList.contains('flipped')) {
-                    card.classList.add('flipped');
-                    selected.push(card);
-                    if(selected.length === 2) {
-                        if(selected[0].innerText === selected[1].innerText) {
-                            found++; document.getElementById('pairs').innerText = found;
-                            selected = [];
-                            if(found === 6) { clearInterval(clock); setTimeout(()=>alert("¡Victoria!"), 500); }
-                        } else {
-                            setTimeout(() => { selected.forEach(c => c.classList.remove('flipped')); selected = []; }, 800);
-                        }
-                    }
-                }
-            };
-            grid.appendChild(card);
-        });
-    </script>
+<script src="memoria.js"></script>
 </body>
 </html>
