@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Memoria Flash</title>
+    <style>
+        .memory-card { width: 100px; height: 100px; perspective: 1000px; cursor: pointer; }
+        .inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flipped .inner { transform: rotateY(180deg); }
+        .front, .back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border-radius: 10px; }
+        .front { background: #2a5298; color: white; }
+        .back { background: white; transform: rotateY(180deg); border: 2px solid #2a5298; }
+    </style>
+</head>
+<body class="bg-light text-center">
+    <div class="container py-5">
+        <h1>Juego de Memoria</h1>
+        <div class="d-flex justify-content-center gap-4 mb-4">
+            <div class="p-3 bg-white shadow-sm rounded">Tiempo: <span id="timer" class="fw-bold text-danger">30</span>s</div>
+            <div class="p-3 bg-white shadow-sm rounded">Pares: <span id="pairs" class="fw-bold text-primary">0</span>/6</div>
+        </div>
+        <div id="grid" class="d-flex flex-wrap justify-content-center mx-auto" style="max-width: 500px;"></div>
+        <a href="index.html" class="btn btn-secondary mt-4">Salir</a>
+    </div>
+
+    <script>
+        const icons = ['🔥','🔥','🍀','🍀','💎','💎','🍎','🍎','👻','👻','⚽','⚽'];
+        let deck = icons.sort(() => Math.random() - 0.5), selected = [], found = 0, time = 30;
+        const grid = document.getElementById('grid');
+
+        const clock = setInterval(() => {
+            time--; document.getElementById('timer').innerText = time;
+            if(time <= 0) { clearInterval(clock); alert("¡Tiempo acabado!"); location.reload(); }
+        }, 1000);
+
+        deck.forEach((icon) => {
+            const card = document.createElement('div');
+            card.className = "memory-card m-2";
+            card.innerHTML = `<div class="inner"><div class="front">?</div><div class="back">${icon}</div></div>`;
+            card.onclick = () => {
+                if(selected.length < 2 && !card.classList.contains('flipped')) {
+                    card.classList.add('flipped');
+                    selected.push(card);
+                    if(selected.length === 2) {
+                        if(selected[0].innerText === selected[1].innerText) {
+                            found++; document.getElementById('pairs').innerText = found;
+                            selected = [];
+                            if(found === 6) { clearInterval(clock); setTimeout(()=>alert("¡Victoria!"), 500); }
+                        } else {
+                            setTimeout(() => { selected.forEach(c => c.classList.remove('flipped')); selected = []; }, 800);
+                        }
+                    }
+                }
+            };
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
